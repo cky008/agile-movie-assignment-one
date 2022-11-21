@@ -70,8 +70,8 @@ describe("Filtering", () => {
     })
 })
   describe("Combined genre and title", () => {
-    it("show movies with 'b' in the title and selected genre", () => {
-      const searchString = "b";
+    it("show movies with 'a' in the title and selected genre", () => {
+      const searchString = "a";
       const selectedGenreId = 35;
       const selectedGenreText = "Comedy";
       const selectedLanguage = "en";

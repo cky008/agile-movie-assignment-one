@@ -27,7 +27,7 @@ const PersonDetailInfo = ({ person }) => {
           Known Credit
         </Typography>
         <Typography variant="body1" sx={{marginBottom: "20px"}}>
-          {Math.round(person.popularity)}
+          {person.popularity}
         </Typography>
         <Typography variant="subtitle2" sx={{fontSize: "23px"}}>
           Gender
