@@ -30,6 +30,13 @@ export const genderParseString = (genderNum) => {
   else return "Others";
 }
 
+export const convertRating = (rating) => {
+  if (rating === 1) return 5;
+  else if (rating === 2) return 4;
+  else if (rating === 4) return 2;
+  else return 1;
+}
+
 // export const filterByTitleandGenre = (movieList, string, genreId) =>
 // (movieList.filter((m) => m.title.toLowerCase().search(string) !== -1)).filter((n) => n.genre_ids.includes(genreId));
 

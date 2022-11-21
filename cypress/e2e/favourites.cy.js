@@ -1,5 +1,6 @@
 let movies;
 const movieId = 497582; // Enola Holmes movie id
+import { convertRating } from "../support/e2e";
 
 describe("The favourites feature", () => {
   before(() => {
@@ -33,6 +34,7 @@ describe("The favourites feature", () => {
       cy.get("button").contains("Movies").click();
       cy.get("li").contains("Favorites").click();
     });
+    
     it("only the tagged movies are listed", () => {
       cy.get(".MuiCardHeader-content").should("have.length", 2);
       cy.get(".MuiCardHeader-content")
@@ -44,5 +46,48 @@ describe("The favourites feature", () => {
         .find("p")
         .contains(movies[3].title);
     });
+
+    it(" only the not deleted movies are listed", () => {
+      cy.get("button[aria-label='remove from favorites']").eq(0).click({force:true});
+      cy.get(".MuiCardHeader-content").eq(0).find("p").contains(movies[3].title);
+    });
+
+    it(" not selected movie card not show the red hear", () => {
+      cy.get("button[aria-label='remove from favorites']").eq(0).click({force:true});
+      cy.get(".MuiButtonBase-root").eq(0).click({force:true});
+      cy.get(".MuiCardHeader-root").eq(1).find("svg").should("not.exist");
+    });
+  });
+
+  describe("The review form", () => {
+    beforeEach(() => {
+      cy.get("button[aria-label='add to favorites']").eq(1).click();
+      cy.get("button[aria-label='add to favorites']").eq(3).click();
+      cy.get("button").contains("Movies").click();
+      cy.get("li").contains("Favorites").click();
+      cy.get("svg[data-testid='RateReviewIcon']").eq(0).click({force:true});
+    });
+
+    it("was navigated from favorites page ", () => {
+      cy.url().should("include", `/reviews/form`);
+    })
+
+    it("display review form correctly", () => {
+      cy.get("h2").contains("Write a review");
+      cy.get(".MuiTypography-root").contains(movies[1].title)
+    })
+
+    it("pop up message after submit review and after close the pop up message should back to favorites page", () => {
+      const subValues = {
+        author: "Kaiyu Chen",
+        review: "Verrrrrrrrrrrrrrry Niccccccccce!!!!!!!!!",
+        rating: convertRating(5),
+      };
+      cy.onSubmit(subValues);
+      cy.get(".MuiAlert-message").contains("Thank you for submitting a review");
+      cy.get(".MuiAlert-action>.MuiButtonBase-root").click();
+      cy.url().should("include", `/favorites`);
+    })
+
   });
 });
