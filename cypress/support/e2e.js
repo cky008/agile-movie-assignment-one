@@ -21,8 +21,11 @@ export const filterByTitle = (movieList, string) =>
 export const filterByGenre = (movieList, genreId) =>
   movieList.filter((m) => m.genre_ids.includes(genreId));
 
-export const filterByTitleandGenre = (movieList, string, genreId) =>
-(movieList.filter((m) => m.title.toLowerCase().search(string) !== -1)).filter((n) => n.genre_ids.includes(genreId));
+export const filterByLanguage = (movieList, language) =>
+  movieList.filter((m) => m.original_language === language)
+
+// export const filterByTitleandGenre = (movieList, string, genreId) =>
+// (movieList.filter((m) => m.title.toLowerCase().search(string) !== -1)).filter((n) => n.genre_ids.includes(genreId));
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
