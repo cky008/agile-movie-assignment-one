@@ -44,7 +44,7 @@ bundle_app:
 
 e2etest:
 # Node docker image with Cypress and Edge pre-installed
-  image: cypress/browsers:node12.14.1-edge88
+  image: cypress/browsers:node12.18.4-edge88
   stage: test
   only:
     - main

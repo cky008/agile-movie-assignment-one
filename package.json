@@ -24,6 +24,7 @@
     "react-refresh": "0.11.0"
   },
   "scripts": {
+    "start:ci": "start-server-and-test 'http-server ./build  -p 3000 -P http://localhost:3000?' 3000 'cypress run --browser edge '",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -72,7 +73,10 @@
     "@storybook/testing-library": "^0.0.13",
     "babel-plugin-named-exports-order": "^0.0.2",
     "cypress": "^10.11.0",
+    "http-server": "^13.0.2",
+    "install": "^0.13.0",
     "prop-types": "^15.8.1",
+    "start-server-and-test": "^1.14.0",
     "webpack": "^5.74.0"
   }
 }
