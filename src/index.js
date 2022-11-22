@@ -3,7 +3,6 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Navigate, Routes} from "react-router-dom";
 import HomePage from "./pages/homePage";
 import FavoriteMoviesPage from "./pages/favoriteMoviesPage";
-import MovieReviewPage from "./pages/movieReviewPage";
 import SiteHeader from './components/siteHeader';
 import UpcomingMoviesPage from'./pages/upComingMoviesPage'
 import { QueryClientProvider, QueryClient } from "react-query";
@@ -17,6 +16,9 @@ const MoviePage = lazy(() => import("./pages/movieDetailsPage"));
 const LoginPage = lazy(() => import("./pages/loginPage"));
 const RegisterPage = lazy(() => import("./pages/registerPage"));
 const ResetPage = lazy(() => import("./pages/resetPage"));
+const MovieReviewPage = lazy(() => import("./pages/movieReviewPage"));
+
+
 
 const queryClient = new QueryClient({
   defaultOptions: {
