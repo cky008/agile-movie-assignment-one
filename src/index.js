@@ -8,7 +8,6 @@ import UpcomingMoviesPage from'./pages/upComingMoviesPage'
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from 'react-query/devtools'
 import MoviesContextProvider from "./contexts/moviesContext";
-import AddMovieReviewPage from './pages/addMovieReviewPage';
 import PersonPage from './pages/personPage';
 import PersonDetailsPage from './pages/personDetailsPage'
 import TopRatedPage from "./pages/topRatedPage";
@@ -17,6 +16,7 @@ const LoginPage = lazy(() => import("./pages/loginPage"));
 const RegisterPage = lazy(() => import("./pages/registerPage"));
 const ResetPage = lazy(() => import("./pages/resetPage"));
 const MovieReviewPage = lazy(() => import("./pages/movieReviewPage"));
+const AddMovieReviewPage = lazy(() => import("./pages/addMovieReviewPage"));
 
 
 
