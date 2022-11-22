@@ -122,10 +122,8 @@ describe("Navigation", () => {
     });
     it("navigates between the movies detail page and the Home page.", () => {
       cy.get("svg[data-testid='ArrowBackIcon'").click({force:true});
-      cy.wait(500);
       cy.url().should("not.include", `/movies/${movies[0].id}`);
       cy.get("svg[data-testid='ArrowForwardIcon'").click({force:true});
-      cy.wait(500);
       cy.url().should("include", `/movies/${movies[0].id}`);
     });
   });
