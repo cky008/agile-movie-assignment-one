@@ -37,6 +37,16 @@ export const convertRating = (rating) => {
   else return 1;
 }
 
+export function makeid(length) {
+  var result           = '';
+  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+  }
+
 // export const filterByTitleandGenre = (movieList, string, genreId) =>
 // (movieList.filter((m) => m.title.toLowerCase().search(string) !== -1)).filter((n) => n.genre_ids.includes(genreId));
 
