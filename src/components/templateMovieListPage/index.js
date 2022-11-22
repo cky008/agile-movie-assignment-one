@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import Header from "../headerMovieList";
-import FilterCard from "../filterMoviesCard";
-import MovieList from "../movieList";
+import React, { useState, lazy, Suspense } from "react";
 import Grid from "@mui/material/Grid";
 import Pagination from '@mui/material/Pagination';
 import { PaginationItem } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+const FilterCard = lazy(() => import("../filterMoviesCard"));
+const Header = lazy(() => import("../headerMovieList"));
+const MovieList = lazy(() => import("../movieList"));
 
 function MovieListPageTemplate({ movies, title, action, page, total_pages, pagination }) {
   const [nameFilter, setNameFilter] = useState("");
@@ -55,23 +55,31 @@ function MovieListPageTemplate({ movies, title, action, page, total_pages, pagin
   return (
     <Grid container sx={{ padding: '20px' }}>
       <Grid item xs={12}>
-        <Header title={title} />
+        <Suspense fallback={<h1>Building Header</h1>}>
+          {<Header title={title} />}
+        </Suspense>
       </Grid>
       <Grid item container spacing={5}>
         <Grid key="find" item xs={12} sm={6} md={4} lg={3} xl={2}>
+        <Suspense fallback={<h1>Building FilterCard</h1>}>
+          {
           <FilterCard
-            onUserInput={handleChange}
-            titleFilter={nameFilter}
-            genreFilter={genreFilter}
-            languageFilter={languageFilter}
-            languages={languages}
-          />
+          onUserInput={handleChange}
+          titleFilter={nameFilter}
+          genreFilter={genreFilter}
+          languageFilter={languageFilter}
+          languages={languages}
+        />
+          }
+        </Suspense>
         </Grid>
+        <Suspense fallback={<h1>Building MovieList</h1>}>
         {(page === "/movies/favorites") ? (
           <MovieList action={action} movies={movieSlice[pagination-1]}></MovieList>
         ) : (
           <MovieList action={action} movies={displayedMovies}></MovieList>
         )}
+        </Suspense>
       </Grid>
       {(page === "/movies/favorites") ? (
         <Pagination count={movieSlice.length} color="primary" variant="outlined" shape="rounded" size="large" showFirstButton showLastButton page={parseInt(pagination)} sx={{ justifyContent: 'center', margin: 'auto', marginTop: '20px'}} 
