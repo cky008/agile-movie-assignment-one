@@ -62,17 +62,12 @@ describe("Review pgae tests", () => {
       cy.get(".MuiTableBody-root>tr>td>a").contains("Full Review").eq(0).click();
     });
 
-    it("navigate to the review detail page", () => {
+    it("navigate to the review detail page and displays the author and review content", () => {
+      cy.wait(500);
       cy.url().should("include", `/reviews/${idList[0]}`);
-    })
-
-    it("displays review author", () => {
       cy.get("p").eq(0).contains(authorList[0]);
-    })
-
-    it(" display the the review content", () => {
       cy.get("p").eq(1).contains(excerptList[0].substring(0,100));
-    });
+    })
   });
 
 });

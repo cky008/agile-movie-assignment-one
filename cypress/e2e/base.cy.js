@@ -69,6 +69,7 @@ describe("Base tests", () => {
     beforeEach(() => {
       cy.get("button").contains("Movies").click();
       cy.get("li").contains("Upcoming").click();
+      cy.wait(500);
     });
     it("displays the page header and 20 movies", () => {
       cy.get("h3").contains("Upcoming Movies");

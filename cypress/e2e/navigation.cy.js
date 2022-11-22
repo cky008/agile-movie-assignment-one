@@ -30,15 +30,17 @@ describe("Navigation", () => {
   });
   describe("From the home page to a movie's details", () => {
     it("navigates to the movie details page and change browser URL", () => {
-      cy.get(".MuiCardActions-root").eq(0).contains("More Info").click();
-      cy.url().should("include", `/movies/${movies[0].id}`);
+      cy.wait(500);
+      cy.get(".MuiCardActions-root").eq(1).contains("More Info").click();
+      cy.url().should("include", `/movies/${movies[1].id}`);
     });
   });
   describe("From the people page to a person's details", () => {
     it("navigates to the person details page and change browser URL", () => {
       cy.visit("/person/page1");
-      cy.get(".MuiCardActions-root").eq(0).contains("More Info").click();
-      cy.url().should("include", `/person/${people[0].id}`);
+      cy.wait(500);
+      cy.get(".MuiCardActions-root").eq(1).contains("More Info").click();
+      cy.url().should("include", `/person/${people[1].id}`);
     });
   });
   describe("The site header", () => {
