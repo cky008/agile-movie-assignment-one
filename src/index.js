@@ -6,7 +6,6 @@ import { ReactQueryDevtools } from 'react-query/devtools'
 import MoviesContextProvider from "./contexts/moviesContext";
 import PersonPage from './pages/personPage';
 import PersonDetailsPage from './pages/personDetailsPage'
-import TopRatedPage from "./pages/topRatedPage";
 const MoviePage = lazy(() => import("./pages/movieDetailsPage"));
 const LoginPage = lazy(() => import("./pages/loginPage"));
 const RegisterPage = lazy(() => import("./pages/registerPage"));
@@ -17,6 +16,7 @@ const SiteHeader = lazy(() => import("./components/siteHeader"));
 const FavoriteMoviesPage = lazy(() => import("./pages/favoriteMoviesPage"));
 const HomePage = lazy(() => import("./pages/homePage"));
 const UpcomingMoviesPage = lazy(() => import("./pages/upComingMoviesPage"));
+const TopRatedPage = lazy(() => import("./pages/topRatedPage"));
 
 
 
