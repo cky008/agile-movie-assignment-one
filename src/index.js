@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Navigate, Routes} from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from 'react-query/devtools'
 import MoviesContextProvider from "./contexts/moviesContext";
-import PersonPage from './pages/personPage';
 const MoviePage = lazy(() => import("./pages/movieDetailsPage"));
 const LoginPage = lazy(() => import("./pages/loginPage"));
 const RegisterPage = lazy(() => import("./pages/registerPage"));
@@ -17,9 +16,7 @@ const HomePage = lazy(() => import("./pages/homePage"));
 const UpcomingMoviesPage = lazy(() => import("./pages/upComingMoviesPage"));
 const TopRatedPage = lazy(() => import("./pages/topRatedPage"));
 const PersonDetailsPage = lazy(() => import("./pages/personDetailsPage"));
-
-
-
+const PersonPage = lazy(() => import("./pages/personPage"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
