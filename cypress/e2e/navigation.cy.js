@@ -28,14 +28,14 @@ describe("Navigation", () => {
   beforeEach(() => {
     cy.visit("/");
   });
-  describe("From the home page to a movie's details", () => {
+  describe("From the home page to movie's details page", () => {
     it("navigates to the movie details page and change browser URL", () => {
       cy.wait(500);
       cy.get(".MuiCardActions-root").eq(1).contains("More Info").click();
       cy.url().should("include", `/movies/${movies[1].id}`);
     });
   });
-  describe("From the people page to a person's details", () => {
+  describe("From the people page to a person's details page", () => {
     it("navigates to the person details page and change browser URL", () => {
       cy.visit("/person/page1");
       cy.wait(500);
@@ -117,12 +117,15 @@ describe("Navigation", () => {
   });
   describe("The forward/backward links", () => {
     beforeEach(() => {
-      cy.get(".MuiCardActions-root").eq(0).contains("More Info").click();
+      cy.get(".MuiCardActions-root").eq(0).contains("More Info").click({force:true});
+      cy.wait(500);
     });
     it("navigates between the movies detail page and the Home page.", () => {
-      cy.get("svg[data-testid='ArrowBackIcon'").click();
+      cy.get("svg[data-testid='ArrowBackIcon'").click({force:true});
+      cy.wait(500);
       cy.url().should("not.include", `/movies/${movies[0].id}`);
-      cy.get("svg[data-testid='ArrowForwardIcon'").click();
+      cy.get("svg[data-testid='ArrowForwardIcon'").click({force:true});
+      cy.wait(500);
       cy.url().should("include", `/movies/${movies[0].id}`);
     });
   });
