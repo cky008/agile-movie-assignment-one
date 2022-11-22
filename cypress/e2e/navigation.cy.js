@@ -108,6 +108,7 @@ describe("Navigation", () => {
       cy.get("button[aria-label='add to favorites']").eq(3).click();
       cy.get(".MuiButtonBase-root").eq(1).click();
       cy.get(".MuiMenuItem-root").eq(0).click();
+      cy.wait(500);
     });
     it("should navigate to the movie details page.", () => {
       cy.get(".MuiCardActions-root").eq(0).contains("More Info").click({force: true});
