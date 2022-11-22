@@ -16,7 +16,7 @@ const WriteReviewPage = (props) => {
   );
 
   if (isLoading) {
-    return <Spinner />;
+    return    <Suspense fallback={<h1>Loading Componment</h1>}>{<Spinner />}</Suspense>;
   }
 
   if (isError) {
