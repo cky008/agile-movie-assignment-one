@@ -1,8 +1,7 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Navigate, Routes} from "react-router-dom";
 import HomePage from "./pages/homePage";
-import MoviePage from "./pages/movieDetailsPage";
 import FavoriteMoviesPage from "./pages/favoriteMoviesPage";
 import MovieReviewPage from "./pages/movieReviewPage";
 import SiteHeader from './components/siteHeader';
@@ -17,6 +16,7 @@ import LoginPage from "./pages/loginPage";
 import RegisterPage from "./pages/registerPage";
 import ResetPage from "./pages/resetPage";
 import TopRatedPage from "./pages/topRatedPage";
+const MoviePage = lazy(() => import("./pages/movieDetailsPage"));
 
 
 const queryClient = new QueryClient({
@@ -35,6 +35,7 @@ const App = () => {
       <BrowserRouter>
         <SiteHeader />
         <MoviesContextProvider>
+        <Suspense fallback={<h1>Loading page</h1>}>
           <Routes>
             <Route path="/reviews/form" element={ <AddMovieReviewPage /> } />
             <Route exact path="/movies/favorites/page:pagination" element={<FavoriteMoviesPage />} />
@@ -50,6 +51,7 @@ const App = () => {
             <Route exact path="/reset" element={<ResetPage />} />
             <Route path="/login" element={<LoginPage />} />
           </Routes>
+          </Suspense>
         </MoviesContextProvider>
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />

@@ -84,8 +84,8 @@ describe("Movie details pgae tests", () => {
     });
 
     it("displays the correct title and casts number", () => {
-      cy.get(".MuiGrid-root>.MuiTypography-h5").contains("Top Billed Cast");
       cy.get(".MuiBox-root").should("have.length", casts.length + 1);
+      cy.get(".MuiGrid-root>.MuiTypography-h5").contains("Top Billed Cast");
     })
 
     it("navigate to the correct person's page ", () => {
