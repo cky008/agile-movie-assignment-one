@@ -1,6 +1,5 @@
 import React, { lazy, Suspense } from "react";
 import Typography from "@mui/material/Typography";
-const Spinner = lazy(() => import("../spinner"));
 const PersonCredits = lazy(() => import("../personCredits"));
 
 const PersonDetails = ({ person }) => {
