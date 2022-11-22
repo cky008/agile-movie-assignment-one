@@ -1,4 +1,4 @@
-import Spinner from "../component/Spinner"
+import Spinner from "../../src/components/spinner"
 
 describe('spinner.cy.js', () => {
   it('added correctly', () => {
