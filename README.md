@@ -1,18 +1,10 @@
-# Assignment 1 - ReactJS app.
+# Assignment 1 - Agile Software Practice.
 
-Name: Kaiyu Chen
+__Name:__ Kaiyu Chen
 
-## Overview.
+This repository contains the implementation of a React App and its associated Cypress tests and GitLab CI pipeline.
 
-This is a web application based on TMDB API, React, MUI, Firebase and AWS Amplify. It is designed to provide information on movies, TV series and actors through a simple web page. It also supports authentication. This is assignment one for the module Web App Development 2.
-
-### Video Demo  
-[Youtube](https://youtu.be/qZVX9r8Ygm0) , [OneDrive](https://1574666-my.sharepoint.com/:v:/g/personal/fa2nica_1574666_onmicrosoft_com/EfYuBTdPG-RJiZWB4ckh8U8BgnrzhY1ILhYbQCUcryANiA?e=x67IXa) or [bilibili](https://www.bilibili.com/video/BV1A3411f7BN/)
-
-### Online Demo
-via [aws amplify](https://main.d1ik5o6ucwnt3f.amplifyapp.com/page1) or [fa2nica.tk](fa2nica.tk)
-
-### Features.
+## React App Features.
 
 + Change the style of the site header:  
   (Home Favourites Upcoming Option4)  
@@ -30,31 +22,94 @@ via [aws amplify](https://main.d1ik5o6ucwnt3f.amplifyapp.com/page1) or [fa2nica.
 + Several parameterized URLs for individual person page(like individual movie page) and for every list pages(home, upcoming and people/person).  
 + New language filter.  
 + Add Firebase Authentication for Log in/Sign Up/Reset and each header.  
++ Auto-Deploy to [GitHub](https://cky008.github.io/agile-movie-assignment-one/).  
 + Auto-Deploy to [AWS Amplify](https://main.d1ik5o6ucwnt3f.amplifyapp.com/page1).  
-+ Other further learning parts are mentioned in the [Independent learning](#independent-learning-if-relevant) part.  
++ Full Code Splitting Support.  
+
+## Automated Tests.
+
+### Best test cases.
 
 
-## Setup requirements.  
++ [cypress/e2e/favourites.cy.js](cypress/e2e/favourites.cy.js)
++ [cypress/e2e/personDetails.cy.js](cypress/e2e/personDetails.cy.js)
 
-### TMDB API  
 
-In order to run cypress tests you must first create a `.env` file in the project base folder.  
-The contents should include the following.  
-```
-REACT_APP_TMDB_KEY=<YOUR_TMDB_API_KEY>
-FAST_REFRESH=false
-```
-### Build  
+### Cypress Custom commands (if relevant).
 
-In order to install needed package,you need run `npm install` first.
-After all done, you can use
-`npm start`
-to start the server, then you can access the web page by
-```
-http://localhost:3000/
-```
 
-## API endpoints.
++ [cypress/e2e/favourites.cy.js](cypress/e2e/favourites.cy.js)
++ [cypress/e2e/login.cy.js](cypress/e2e/login.cy.js)
++ [cypress/e2e/register.cy.js](cypress/e2e/register.cy.js)
++ [cypress/e2e/reset.cy.js](cypress/e2e/reset.cy.js)
+
+
+## Code Splitting.  
+
+### Route-based Code Splitting  
++ [src/index.js](src/index.js)  
+
+### Pages ([src/pages](src/page))  
++ [src/pages/addMovieReviewPage.js](src/pages/addMovieReviewPage.js)  
++ [src/pages/favoriteMoviesPage.js](src/pages/favoriteMoviesPage.js)  
++ [src/pages/homePage.js](src/pages/homePage.js)  
++ [src/pages/loginPage.js](src/pages/loginPage.js)  
++ [src/pages/movieDetailsPage.js](src/pages/movieDetailsPage.js)  
++ [src/pages/movieReviewPage.js](src/pages/movieReviewPage.js)  
++ [src/pages/personDetailsPage.js](src/pages/personDetailsPage.js)  
++ [src/pages/personPage.js](src/pages/personPage.js)  
++ [src/pages/registerPage.js](src/pages/registerPage.js)  
++ [src/pages/resetPage.js](src/pages/resetPage.js)  
++ [src/pages/topRatedPage.js](src/pages/topRatedPage.js)  
++ [src/pages/upComingMoviesPage.js](src/pages/upComingMoviesPage.js)  
+
+### Components ([src/components/](src/components/))  
++ [src/components/filterMoviesCard/index.js](src/components/filterMoviesCard/index.js)  
++ [src/components/movieDetails/index.js](src/components/movieDetails/index.js)  
++ [src/components/movieList/index.js](src/components/movieList/index.js)  
++ [src/components/personCredits/index.js](src/components/personCredits/index.js)  
++ [src/components/personDetails/index.js](src/components/personDetails/index.js)  
++ [src/components/siteHeader/index.js](src/components/siteHeader/index.js)  
++ [src/components/templateMovieListPage/index.js](src/components/templateMovieListPage/index.js)  
++ [src/components/templateMoviePage/index.js](src/components/templateMoviePage/index.js)  
++ [src/components/templatePersonListPage/index.js](src/components/templatePersonListPage/index.js)  
++ [src/components/templatePersonPage/index.js](src/components/templatePersonPage/index.js)  
+
+
+## Pull Requests.
+
+### GitHub  
+[https://github.com/cky008/agile-movie-assignment-one](https://github.com/cky008/agile-movie-assignment-one)  
+
+### GitLab  
+[https://gitlab.com/20100199/agile-movie-assignment-one](https://gitlab.com/20100199/agile-movie-assignment-one)
+
+## Independent learning (If relevant).  
+
+### Auto-deployment on GitHub and AWS Amplify  
+You can access this movie app through [GitHub](https://cky008.github.io/agile-movie-assignment-one/) anytime or access the start point of this movie app through [AWS Amplify](https://main.d1ik5o6ucwnt3f.amplifyapp.com/page1).  
+For Github deployment, I followed the document from [facebook](https://create-react-app.dev/docs/deployment/).  
+![GitHub Deployment](./images/github_deployment.jpg)
+For AWS Amplify deployment, I followed the document from [amazon](https://aws.amazon.com/getting-started/hands-on/build-react-app-amplify-graphql/module-one/).  
+![AWS Amplify Deployment](./images/aws_deployment.jpg)
+![Deployment](./images/deployment.jpg)
+
+### Component Tests  
+Have tried to use the component [test](cypress/component/spinner.cy.js) from cypress for component [spinner](src/components/spinner/index.js), inspired by the document from [facebook](https://docs.cypress.io/guides/component-testing/react/quickstart).  
+![Component Tests](./images/component_tests.jpg)
+
+## Other related links and things  
+### Online Demo
+GitHub: https://cky008.github.io/agile-movie-assignment-one/  
+AWS Amplify: https://main.d1ik5o6ucwnt3f.amplifyapp.com/page1  
+or [fa2nica.tk](fa2nica.tk)  
+
+### Video Demo  
+Youtube: https://youtu.be/qZVX9r8Ygm0,  
+OneDrive: https://1574666-my.sharepoint.com/:v:/g/personal/fa2nica_1574666_onmicrosoft_com/EfYuBTdPG-RJiZWB4ckh8U8BgnrzhY1ILhYbQCUcryANiA?e=x67IXa  
+or bilibili: https://www.bilibili.com/video/BV1A3411f7BN/
+
+### API endpoints.
 
 Old 
 + Discover list of movies - discover/movie
@@ -73,40 +128,3 @@ New
 + Get specific movie's Cast Credit (getMovieCredits) - movies/:id 
 + The api for List Pages now all have a parameter 'page' for Pagination   
 
-## Routing.  
-
-Old 
-+ / - displays discover movies page.
-+ /movies/favourite - displays user's favourite movies.
-+ /movies/upcoming - displays upcoming movies.
-+ /movies/:id - displays a particular movie's detail.
-+ /reviews/form - User can write reviews for their favorite movies.
-+ /reviews/:id - displays reviews about a movie.
-
-New 
-+ /movies/toprated - displays all movies in rating ranks.
-+ /person - displays all popular people.
-+ /person/:id - displays specific person's info.
-+ /register - for user sign up.
-+ /login - for user log in/sign in.
-+ /reset - for user reset their password.
-
-
-## Independent learning (If relevant).
-
-### Auto-Deploy to AWS Amplify 
-https://aws.amazon.com/getting-started/hands-on/build-react-app-amplify-graphql/module-one/ . 
-
-### Use the ImageListItemBar, Paper, useMediaQuery, Theme, CssBaseline, Icon and etc. Componments from mui 
-https://mui.com/zh/material-ui/api/image-list-item-bar/  
-https://mui.com/zh/material-ui/react-paper/  
-https://mui.com/system/styles/advanced/  
-https://mui.com/material-ui/react-css-baseline/  
-https://mui.com/material-ui/material-icons/  
-etc, ...
-
-### Pagination 
-https://mui.com/zh/material-ui/react-pagination/  
-
-### Firebase Authentication
-https://firebase.google.com/docs/auth/where-to-start?authuser=0

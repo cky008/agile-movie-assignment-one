@@ -1,5 +1,4 @@
 let movies;
-const movieId = 497582; // Enola Holmes movie id
 import { convertRating } from "../support/e2e";
 
 describe("The favourites feature", () => {
@@ -52,7 +51,7 @@ describe("The favourites feature", () => {
       cy.get(".MuiCardHeader-content").eq(0).find("p").contains(movies[3].title);
     });
 
-    it(" not selected movie card not show the red hear", () => {
+    it(" not selected movie card not show the red heart", () => {
       cy.get("button[aria-label='remove from favorites']").eq(0).click({force:true});
       cy.get(".MuiButtonBase-root").eq(0).click({force:true});
       cy.get(".MuiCardHeader-root").eq(1).find("svg").should("not.exist");
@@ -68,7 +67,7 @@ describe("The favourites feature", () => {
       cy.get("svg[data-testid='RateReviewIcon']").eq(0).click({force:true});
     });
 
-    it("was navigated from favorites page ", () => {
+    it("was navigated to review form from favorites page ", () => {
       cy.url().should("include", `/reviews/form`);
     })
 
