@@ -1,11 +1,10 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { getUpComingMovies } from "../api/tmdb-api";
-import PageTemplate from '../components/templateMovieListPage';
 import { useQuery } from 'react-query';
-import Spinner from '../components/spinner';
-import AddToWatchIcon from '../components/cardIcons/addToWatch'
 import { useParams } from "react-router-dom";
-
+const PageTemplate = lazy(() => import("../components/templateMovieListPage"));
+const Spinner = lazy(() => import("../components/spinner"));
+const AddToWatchIcon = lazy(() => import("../components/cardIcons/addToWatch"));
 
 const UpcomingMoviesPage = (props) => {
 
@@ -14,7 +13,7 @@ const UpcomingMoviesPage = (props) => {
   const {  data, error, isLoading, isError }  = useQuery(["discoverUpcoming", pagination], getUpComingMovies)
 
   if (isLoading) {
-    return <Spinner />
+    return    <Suspense fallback={<h1>Loading Componment</h1>}>{<Spinner />}</Suspense>;
   }
 
   if (isError) {
@@ -28,16 +27,20 @@ const UpcomingMoviesPage = (props) => {
   
 
   return (
-    <PageTemplate
-      title='Upcoming Movies'
-      movies={movies}
-      action={(movie) => {
-        return <AddToWatchIcon movie={movie} />
-      }}
-      page="/movies/upcoming"
-      pagination={pagination}
-      total_pages={data.total_pages}
-    />
+    <Suspense fallback={<h1>Loading PageTemplate</h1>}>
+      {
+        <PageTemplate
+        title='Upcoming Movies'
+        movies={movies}
+        action={(movie) => {
+          return <AddToWatchIcon movie={movie} />
+        }}
+        page="/movies/upcoming"
+        pagination={pagination}
+        total_pages={data.total_pages}
+      />
+      }
+    </Suspense>
   );
 };
 

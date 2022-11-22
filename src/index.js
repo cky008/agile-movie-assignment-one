@@ -1,7 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Navigate, Routes} from "react-router-dom";
-import UpcomingMoviesPage from'./pages/upComingMoviesPage'
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from 'react-query/devtools'
 import MoviesContextProvider from "./contexts/moviesContext";
@@ -17,6 +16,7 @@ const AddMovieReviewPage = lazy(() => import("./pages/addMovieReviewPage"));
 const SiteHeader = lazy(() => import("./components/siteHeader"));
 const FavoriteMoviesPage = lazy(() => import("./pages/favoriteMoviesPage"));
 const HomePage = lazy(() => import("./pages/homePage"));
+const UpcomingMoviesPage = lazy(() => import("./pages/upComingMoviesPage"));
 
 
 
