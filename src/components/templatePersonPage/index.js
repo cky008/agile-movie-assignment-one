@@ -1,11 +1,11 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import Grid from "@mui/material/Grid";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import { getPersonImages } from "../../api/tmdb-api";
 import { useQuery } from "react-query";
-import Spinner from '../spinner'
-import PersonDetailInfo from "../personDetailInfo";
+const Spinner = lazy(() => import("../spinner"));
+const PersonDetailInfo = lazy(() => import("../personDetailInfo"));
 
 const TemplatePersonPage = ({ person, children }) => {
 
@@ -15,7 +15,7 @@ const TemplatePersonPage = ({ person, children }) => {
   );
 
   if (isLoading) {
-    return <Spinner />;
+    return    <Suspense fallback={<h1>Loading Componment</h1>}>{<Spinner />}</Suspense>;
   }
 
   if (isError) {
@@ -43,7 +43,9 @@ const TemplatePersonPage = ({ person, children }) => {
                     </ImageListItem>
             </ImageList>
           </div>
-          <PersonDetailInfo person={person} />
+          <Suspense fallback={<h1>Building PersonDetailInfo</h1>}>
+            {<PersonDetailInfo person={person} />}
+          </Suspense>
         </Grid>
 
         <Grid item xs={9}>

@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, lazy, Suspense } from "react";
+import { useQuery } from "react-query";
 import Drawer from "@mui/material/Drawer";
-import MovieReviews from "../movieReviews"
-import MovieCredits from "../movieCredits";
 import Chip from "@mui/material/Chip";
 import Paper from "@mui/material/Paper";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
@@ -10,9 +9,11 @@ import StarRate from "@mui/icons-material/StarRate";
 import NavigationIcon from "@mui/icons-material/Navigation";
 import Fab from "@mui/material/Fab";
 import Typography from "@mui/material/Typography";
-import { getMovieReviews } from "../../api/tmdb-api";import { useQuery } from "react-query";
+import { getMovieReviews } from "../../api/tmdb-api";
 import Spinner from '../spinner'
 import { useParams } from 'react-router-dom';
+const MovieReviews = lazy(() => import("../movieReviews"));
+const MovieCredits = lazy(() => import("../movieCredits"));
 
 
 const root = {
@@ -35,7 +36,7 @@ const MovieDetails = ({ movie , casts }) => {
   // console.log(reviews)
 
   if (isLoading) {
-    return <Spinner />;
+    return    <Suspense fallback={<h1>Loading Componment</h1>}>{<Spinner />}</Suspense>;
   }
 
   if (isError) {
@@ -91,7 +92,9 @@ const MovieDetails = ({ movie , casts }) => {
         ))}
       </Paper>
       <br/>
-      <MovieCredits castsList = {casts}/>
+      <Suspense fallback={<h1>Loading page</h1>}>
+        {<MovieCredits castsList = {casts}/>}
+      </Suspense>
       <Fab
         color="secondary"
         variant="extended"
@@ -106,7 +109,9 @@ const MovieDetails = ({ movie , casts }) => {
         Reviews
       </Fab>
       <Drawer anchor="top" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
-        <MovieReviews movie={movie} reviews={reviews} />
+        <Suspense fallback={<h1>Loading page</h1>}>
+          {<MovieReviews movie={movie} reviews={reviews} />}
+        </Suspense>
       </Drawer>
       </>
   );

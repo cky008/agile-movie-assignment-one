@@ -1,6 +1,6 @@
-import React from "react";
-import PersonList from "../personList";
+import React, { lazy, Suspense } from "react";
 import Grid from "@mui/material/Grid";
+const PersonList = lazy(() => import("../personList"));
 
 function PersonListPageTemplate({ persons }) {
 
@@ -9,7 +9,9 @@ function PersonListPageTemplate({ persons }) {
   return (
     <Grid container sx={{ padding: '20px' }}>
       <Grid item container spacing={5}>
-        <PersonList persons={displayedPersons}></PersonList>
+        <Suspense fallback={<h1>Building list</h1>}>
+          {<PersonList persons={displayedPersons}></PersonList>}
+        </Suspense>
       </Grid>
     </Grid>
   );

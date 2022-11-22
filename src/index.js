@@ -1,23 +1,22 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Navigate, Routes} from "react-router-dom";
-import HomePage from "./pages/homePage";
-import MoviePage from "./pages/movieDetailsPage";
-import FavoriteMoviesPage from "./pages/favoriteMoviesPage";
-import MovieReviewPage from "./pages/movieReviewPage";
-import SiteHeader from './components/siteHeader';
-import UpcomingMoviesPage from'./pages/upComingMoviesPage'
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from 'react-query/devtools'
 import MoviesContextProvider from "./contexts/moviesContext";
-import AddMovieReviewPage from './pages/addMovieReviewPage';
-import PersonPage from './pages/personPage';
-import PersonDetailsPage from './pages/personDetailsPage'
-import LoginPage from "./pages/loginPage";
-import RegisterPage from "./pages/registerPage";
-import ResetPage from "./pages/resetPage";
-import TopRatedPage from "./pages/topRatedPage";
-
+const MoviePage = lazy(() => import("./pages/movieDetailsPage"));
+const LoginPage = lazy(() => import("./pages/loginPage"));
+const RegisterPage = lazy(() => import("./pages/registerPage"));
+const ResetPage = lazy(() => import("./pages/resetPage"));
+const MovieReviewPage = lazy(() => import("./pages/movieReviewPage"));
+const AddMovieReviewPage = lazy(() => import("./pages/addMovieReviewPage"));
+const SiteHeader = lazy(() => import("./components/siteHeader"));
+const FavoriteMoviesPage = lazy(() => import("./pages/favoriteMoviesPage"));
+const HomePage = lazy(() => import("./pages/homePage"));
+const UpcomingMoviesPage = lazy(() => import("./pages/upComingMoviesPage"));
+const TopRatedPage = lazy(() => import("./pages/topRatedPage"));
+const PersonDetailsPage = lazy(() => import("./pages/personDetailsPage"));
+const PersonPage = lazy(() => import("./pages/personPage"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -35,6 +34,7 @@ const App = () => {
       <BrowserRouter>
         <SiteHeader />
         <MoviesContextProvider>
+        <Suspense fallback={<h1>Loading page</h1>}>
           <Routes>
             <Route path="/reviews/form" element={ <AddMovieReviewPage /> } />
             <Route exact path="/movies/favorites/page:pagination" element={<FavoriteMoviesPage />} />
@@ -50,6 +50,7 @@ const App = () => {
             <Route exact path="/reset" element={<ResetPage />} />
             <Route path="/login" element={<LoginPage />} />
           </Routes>
+          </Suspense>
         </MoviesContextProvider>
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />
