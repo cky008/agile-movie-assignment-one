@@ -12,12 +12,11 @@ import MoviesContextProvider from "./contexts/moviesContext";
 import AddMovieReviewPage from './pages/addMovieReviewPage';
 import PersonPage from './pages/personPage';
 import PersonDetailsPage from './pages/personDetailsPage'
-import LoginPage from "./pages/loginPage";
-import RegisterPage from "./pages/registerPage";
-import ResetPage from "./pages/resetPage";
 import TopRatedPage from "./pages/topRatedPage";
 const MoviePage = lazy(() => import("./pages/movieDetailsPage"));
-
+const LoginPage = lazy(() => import("./pages/loginPage"));
+const RegisterPage = lazy(() => import("./pages/registerPage"));
+const ResetPage = lazy(() => import("./pages/resetPage"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
