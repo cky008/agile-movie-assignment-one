@@ -1,11 +1,12 @@
-import React from "react";
-import MovieHeader from "../headerMovie";
+import React, { lazy, Suspense } from "react";
 import Grid from "@mui/material/Grid";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import { getMovieImages } from "../../api/tmdb-api";
 import { useQuery } from "react-query";
-import Spinner from '../spinner'
+const MovieHeader = lazy(() => import("../headerMovie"));
+const Spinner = lazy(() => import("../spinner"));
+
 
 const TemplateMoviePage = ({ movie, children }) => {
 
@@ -15,7 +16,7 @@ const TemplateMoviePage = ({ movie, children }) => {
   );
 
   if (isLoading) {
-    return <Spinner />;
+    return       <Suspense fallback={<h1>Loading Componment</h1>}>{<Spinner />}</Suspense>;
   }
 
   if (isError) {
@@ -25,8 +26,9 @@ const TemplateMoviePage = ({ movie, children }) => {
 
   return (
     <>
-      <MovieHeader movie={movie} />
-
+     <Suspense fallback={<h1>Loading page</h1>}>
+      {<MovieHeader movie={movie} />}
+     </Suspense>
       <Grid container spacing={5} sx={{ padding: "15px" }}>
         <Grid item xs={3}>
           <div sx={{

@@ -1,10 +1,10 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { getMovies } from "../api/tmdb-api";
-import PageTemplate from '../components/templateMovieListPage';
 import { useQuery } from 'react-query';
-import Spinner from '../components/spinner';
-import AddToFavoritesIcon from '../components/cardIcons/addToFavorites'
 import { useParams } from "react-router-dom";
+const PageTemplate = lazy(() => import("../components/templateMovieListPage"));
+const Spinner = lazy(() => import("../components/spinner"));
+const AddToFavoritesIcon = lazy(() => import("../components/cardIcons/addToFavorites"));
 
 
 const HomePage = (props) => {
@@ -17,7 +17,7 @@ const HomePage = (props) => {
   );
 
   if (isLoading) {
-    return <Spinner />
+    return    <Suspense fallback={<h1>Loading Componment</h1>}>{<Spinner />}</Suspense>;
   }
 
   if (isError) {
@@ -31,16 +31,20 @@ const HomePage = (props) => {
     // const addToFavorites = (movieId) => true 
   
     return (
-      <PageTemplate
-        title="Discover Movies"
-        movies={movies}
-        action={(movie) => {
-          return <AddToFavoritesIcon movie={movie} />
-        }}
-        page=""
-        pagination={pagination}
-        total_pages={data.total_pages}
-      />
+      <Suspense fallback={<h1>Loading PageTemplate</h1>}>
+        {
+          <PageTemplate
+          title="Discover Movies"
+          movies={movies}
+          action={(movie) => {
+            return <AddToFavoritesIcon movie={movie} />
+          }}
+          page=""
+          pagination={pagination}
+          total_pages={data.total_pages}
+        />
+        }
+      </Suspense>
   );
   };
   export default HomePage;

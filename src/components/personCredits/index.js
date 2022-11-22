@@ -1,13 +1,14 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { getPersonCombinedCredit } from "../../api/tmdb-api";
 import { useQuery } from "react-query";
-import Spinner from '../spinner'
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 import { Link } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
+const Spinner = lazy(() => import("../spinner"));
+
 
 const PersonCredits = ({person}) => {
   const { data , error, isLoading, isError } = useQuery(
@@ -16,7 +17,7 @@ const PersonCredits = ({person}) => {
   );
 
   if (isLoading) {
-    return <Spinner />;
+    return    <Suspense fallback={<h1>Loading Componment</h1>}>{<Spinner />}</Suspense>;
   }
 
   if (isError) {

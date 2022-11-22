@@ -1,11 +1,12 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { useParams } from 'react-router-dom';
-import MovieDetails from "../components/movieDetails/";
-import PageTemplate from "../components/templateMoviePage";
 import { getMovie } from '../api/tmdb-api'
 import { getMovieCredits } from '../api/tmdb-api'
 import { useQuery } from "react-query";
-import Spinner from '../components/spinner'
+const MovieDetails = lazy(() => import("../components/movieDetails/"));
+const PageTemplate = lazy(() => import("../components/templateMoviePage"));
+const Spinner = lazy(() => import("../components/spinner"));
+
 
 const MoviePage = (props) => {
   const { id } = useParams();
@@ -20,7 +21,7 @@ const MoviePage = (props) => {
   );
   
   if (isLoading) {
-    return <Spinner />;
+    return    <Suspense fallback={<h1>Loading Componment</h1>}>{<Spinner />}</Suspense>;
   }
 
   if (isError) {
@@ -28,7 +29,7 @@ const MoviePage = (props) => {
   }
 
   if (isLoading2) {
-    return <Spinner />
+    return    <Suspense fallback={<h1>Loading Componment</h1>}>{<Spinner />}</Suspense>;
   }
   if (isError2) {
     return <h1>{error2.message}</h1>
@@ -38,9 +39,13 @@ const MoviePage = (props) => {
     <>
       {movie ? (
         <>
-          <PageTemplate movie={movie}>
-            <MovieDetails movie={movie} casts={casts}/> 
-          </PageTemplate>
+        <Suspense fallback={<h1>Loading page</h1>}>
+          {<PageTemplate movie={movie}>
+            <Suspense fallback={<h1>Loading page</h1>}>
+              {<MovieDetails movie={movie} casts={casts}/> }
+            </Suspense>
+          </PageTemplate>}
+        </Suspense>
         </>
       ) : (
         <p>Waiting for movie details</p>
